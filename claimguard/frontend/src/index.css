@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0a0f1a;
+  --panel: #111827;
+  --panel-2: #1a2438;
+  --ink: #e8eefc;
+  --muted: #8b9bb8;
+  --accent: #3b82f6;
+  --accent-2: #f59e0b;
+  --warn: #fbbf24;
+  --danger: #ef4444;
+  --ok: #22c55e;
+  --line: rgba(59, 130, 246, 0.22);
+  --font: "IBM Plex Sans", system-ui, sans-serif;
+  --display: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body {
+  font-family: var(--font);
+  color: var(--ink);
+  background:
+    linear-gradient(90deg, rgba(245, 158, 11, 0.04) 0 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(rgba(59, 130, 246, 0.04) 0 1px, transparent 1px) 0 0 / 48px 48px,
+    radial-gradient(700px 380px at 100% 0%, rgba(245, 158, 11, 0.12), transparent 50%),
+    linear-gradient(180deg, #070b14 0%, #0c1220 55%, #0a101c 100%);
+  min-height: 100%;
+}
+
+.display { font-family: var(--display); font-weight: 700; letter-spacing: -0.02em; }
+.mono { font-family: var(--mono); }
+.risk-tile {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  position: relative;
+}
+.risk-tile::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+}
+.risk-tile.warn::before { background: var(--accent-2); }
+.risk-tile.danger::before { background: var(--danger); }
+.rail-btn {
+  transition: background 120ms ease, color 120ms ease;
+}
+.rail-btn:hover { background: rgba(59, 130, 246, 0.12); color: var(--ink); }
+.rail-btn.active {
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--accent);
+  box-shadow: inset 3px 0 0 var(--accent-2);
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.slide-up { animation: slide-up 220ms ease both; }
+
+.span-supported { background: rgba(34, 197, 94, 0.2); border-bottom: 2px solid #22c55e; }
+.span-contradicted { background: rgba(239, 68, 68, 0.28); border-bottom: 2px solid #ef4444; }
+.span-baseless { background: rgba(245, 158, 11, 0.25); border-bottom: 2px solid #f59e0b; }
